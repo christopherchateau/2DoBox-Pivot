@@ -1,31 +1,47 @@
 <!doctype html>
-<html>
-<head>
-    <title>ideaBox</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:700" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-</head>
-
-<body>
-    <section class="container box">
-        <article class="top-box">
-            <form>
-                <h1 class="idea">idea</h1>
-                <h1 class="box">Box</h1>
-                <input id="title-input" type="text" placeholder="Title"><br />
-                <input id="body-input" type="text" placeholder="Body"><br />  
-                <button class="save-btn">save</button><br />
-            </form>
-        </article>
-        
-        <input id="search-input" type="text" placeholder="Search">
-
-        <article class="bottom-box"> </article>
-
-    </section>
-
-    <script src="./jquery/jquery-3.2.1.js"></script>
-    <script src="./index.js"></script>
-</body>
+<html> 
+    <head>
+        <title>2DoBox</title>
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:700|Open+Sans" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+    <body>
+        <section class="todo-box-container">
+            <article class="top-box">
+                <form>
+                    <h1 class="to-do--title">2Do
+                        <span class="to-do--box">Box</span>
+                    </h1>
+                    <input 
+                        class="title-input" 
+                        aria-label="Enter to do item" 
+                        type="text" 
+                        placeholder="Title"
+                    >
+                    <input 
+                        class="body-input" 
+                        aria-label="Enter to do details" 
+                        type="text" 
+                        placeholder="Body"
+                    >
+                    <input 
+                        class="save-btn"
+                        aria-label="Save to do"
+                        type="submit"
+                        value="save"
+                    >
+                </form>
+            </article>
+            <input 
+                class="search-input" 
+                aria-label="Search your to do list" 
+                type="text"     
+                placeholder="Search"
+            >
+            <article class="bottom-box"></article>
+        </section>
+        <script src="./jquery/jquery-3.2.1.js"></script>
+        <script src="./index.js"></script>
+    </body>
+</html>

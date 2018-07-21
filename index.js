@@ -1,5 +1,5 @@
-var title = $('#title-input').val();
-var body = $('#body-input').val();
+// var title = $('.title-input').val();
+// var body = $('.body-input').val();
 var numCards = 0;
 var qualityVariable = "swill";
 
@@ -18,8 +18,8 @@ var newCard = function(id , title , body , quality) {
 
 function cardObject() {
     return {
-        title: $('#title-input').val(),
-        body: $('#body-input').val(),
+        title: $('.title-input').val(),
+        body: $('.body-input').val(),
         quality: qualityVariable
     };
 }
@@ -30,22 +30,26 @@ $.each(localStorage, function(key) {
     $( ".bottom-box" ).prepend(newCard(key, cardData.title, cardData.body, cardData.quality));
 });
 
-var localStoreCard = function() {
+
+
+var stringNStore = function() {
     var cardString = JSON.stringify(cardObject());
     localStorage.setItem('card' + numCards  , cardString);
 }
 
 $('.save-btn').on('click', function(event) {
     event.preventDefault();
-    if ($('#title-input').val() === "" || $('#body-input').val() === "") {
+    if ($('.title-input').val() === "" || $('.body-input').val() === "") {
        return false;
     };  
 
     numCards++;
-    $( ".bottom-box" ).prepend(newCard('card' + numCards, $('#title-input').val(), $('#body-input').val(), qualityVariable)); 
+    $( ".bottom-box" ).prepend(newCard('card' + numCards, $('.title-input').val(), $('.body-input').val(), qualityVariable)); 
     localStoreCard();
     $('form')[0].reset();
 });
+
+
 
 $(".bottom-box").on('click', function(event){
     var currentQuality = $($(event.target).siblings('p.quality').children()[0]).text().trim();
@@ -93,14 +97,3 @@ $(".bottom-box").on('click', function(event){
         localStorage.removeItem(cardHTMLId);
     }
 });
-      
-
-
-
-
-
-
-
-
-
-

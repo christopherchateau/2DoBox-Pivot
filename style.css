@@ -1,15 +1,13 @@
-.container {
+.todo-box-container {
     display: flex;
     flex-direction: column;
     font-family: 'Roboto Slab', serif;
-}
-
-.container-box {
     margin: 0;
 }
 
 body {
     box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
     margin: 0;
 }
 
@@ -21,18 +19,18 @@ body {
     text-align: center;
 }
 
-h1{
+.to-do--title{
     color: #6d6e71;
     display: inline-block;
     font-size: 275%;
     margin-bottom:  30px;
 }
 
-.idea {
+.to-do--box {
     color: #00a79d;
 }
 
-#title-input {
+.title-input {
     align-items: center;
     display: flex;
     height: 30px;
@@ -40,7 +38,7 @@ h1{
     width: 45%;
 }
 
-#body-input {
+.body-input {
     align-items: center;
     display: flex;
     height: 30px;
@@ -48,7 +46,7 @@ h1{
     width: 45%;
 }
 
-#search-input {
+.search-input {
     height: 30px;
     margin-top: 50px;
     width: 45%;
@@ -70,7 +68,7 @@ h1{
 input {
     align-items: center;
     display: flex;
-    font-family: 'Open Sans', sans-serif;
+    /*font-family: 'Open Sans', sans-serif;*/
     font-size: 100%;
     justify-content: space-between;
     margin: auto;
@@ -105,12 +103,12 @@ h2 {
 
 p {
     color: #939598;
-    font-family: 'Open Sans', sans-serif;
+    /*font-family: 'Open Sans', sans-serif;*/
 }
 
 .body-of-card{
     color: #939598;
-    font-family: 'Open Sans', sans-serif;
+    /*font-family: 'Open Sans', sans-serif;*/
     font-size: 100%;
 }
 
@@ -173,7 +171,7 @@ button {
         width: 85%;
     }
 
-    #search-input {
+    .search-input {
         border: solid #999 1px;
     }
 }
