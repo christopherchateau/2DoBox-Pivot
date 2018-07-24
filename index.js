@@ -1,10 +1,10 @@
 $(document).ready(populateStoredToDos(retrieveStoredToDos()));
 $('.populated-todos--container').on('click', '.up-vote--icon', upVote);
 $('.populated-todos--container').on('click', '.down-vote--icon', downVote);
-$('.populated-todos--container').on('click', '.delete-button', deleteToDo);
-$('.populated-todos--container').on('keyup', '.idea-title', updateEditedTitle);
-$('.populated-todos--container').on('keyup', '.idea-body', updateEditedBody);
-$('.populated-todos--container').bind('keypress', disableReturn);
+$('.populated-todos--container').on('click', '.delete-button--icon', deleteToDo);
+$('.populated-todos--container').on('keydown', '.todo-title', updateEditedTitle);
+$('.populated-todos--container').on('keydown', '.todo-body', updateEditedBody);
+// $('.populated-todos--container').bind('keypress', disableReturn);
 $('.title-input').on('keyup', toggleSaveButton);
 $('.body-input').on('keyup', toggleSaveButton);
 $('.save-btn').on('click', saveNewIdea)
@@ -57,13 +57,13 @@ function createHTMLToDo(toDo) {
     
     return `<article id="${toDo.id}" class="populated-todo">
                 <div class="searchable">
-                    <h2 contenteditable="true" spellcheck="false" class="todo-title">${toDo.title}</h2>
-                    <button class="delete-button"></button>
-                    <p contenteditable="true" spellcheck="false" class="todo-body">${toDo.body}</p>
+                    <h2 contenteditable spellcheck="false" class="todo-title">${toDo.title}</h2>
+                    <button class="delete-button--icon icon"></button>
+                    <p contenteditable spellcheck="false" class="todo-body">${toDo.body}</p>
                 </div>
-                <button class="up-vote--icon"></button>
-                <button class="down-vote--icon"></button> 
-                <h3>Quality:<span class="quality">${toDo.quality}</span></p>
+                <button class="up-vote--icon icon"></button>
+                <button class="down-vote--icon icon"></button> 
+                <h3>Quality: <span class="quality">${toDo.quality}</span></p>
             </article>`
 }
 
@@ -165,22 +165,22 @@ function updateEditedTitle(e) {
   var editedTitle = $(this).closest('.todo-title').text();
   var clickedId = $(this).closest('.populated-todo').attr('id');
   var parsedObj = getNParse(clickedId);
-  if (e.keyCode == 13) {
-    $('.idea-title').blur();
+  if (e.keyCode == 13 && !e.shiftKey) {
+    $('.todo-title').blur();
   }
   parsedObj.title = editedTitle;
-  storeIdea(parsedObj);
+  stringNStore(parsedObj);
 }
 
 function updateEditedBody(e) {
   var editedBody = $(this).closest('.todo-body').text();
   var clickedId = $(this).closest('.populated-todo').attr('id');
   var parsedObj = getNParse(clickedId);
-  if (e.keyCode == 13) {
-    $('.idea-body').blur();
+  if (e.keyCode == 13 && !e.shiftKey) {
+    $('.todo-body').blur();
   }
   parsedObj.body = editedBody;
-  storeIdea(parsedObj);
+  stringNStore(parsedObj);
 }
 
 function getNParse(id) {
@@ -212,7 +212,6 @@ function search() {
 }
 
 function deleteToDo(e) {
-  $(e.target).parent().parent().slideUp(500);
   var clickedToDo = $(this).closest('.populated-todo');
   clickedToDo.remove();
   localStorage.removeItem(JSON.parse(clickedToDo.attr('id')));
@@ -228,8 +227,8 @@ function wipeHTMLCards() {
   $('.populated-todos--container').html('');
 }
 
-function disableReturn(e) {
-   if (e.keyCode == 13) {
-      return false;
-   }
-}
+// function disableReturn(e) {
+//    if (e.keyCode == 13) {
+//       return false;
+//    }
+// }

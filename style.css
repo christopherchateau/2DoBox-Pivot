@@ -1,64 +1,65 @@
-.todo-box--container {
-    display: flex;
-    flex-direction: column;
-    font-family: 'Roboto Slab', serif;
-    margin: 0;
-}
-
 body {
     box-sizing: border-box;
     font-family: 'Open Sans', sans-serif;
     margin: 0;
 }
 
-.top-box {
+.todo-box--container {
+    display: flex;
+    flex-direction: column;
+    font-family: 'Roboto Slab', serif;
     background-color: #e5f3f2;
-    box-sizing: border-box;
-    height: 300px;
-    margin: 0;
+    height: 430px;
     text-align: center;
 }
 
 .to-do--title{
     color: #6d6e71;
-    display: inline-block;
-    font-size: 275%;
-    margin-bottom:  30px;
+    font-size: 4rem;
+    margin-bottom: 30px;
 }
 
-.to-do--box {
+.to-do--title-span {
     color: #00a79d;
 }
 
+.form-elements {
+    color: #939598;
+    font-size: 2em;
+    height: 1.5em;
+    margin: auto;
+    margin-bottom: 1.2em;
+    padding: 2px 0 2px 8px;
+    width: 55%;
+    border: 2px solid #BFC0C2;
+}
+
+.form-elements::placeholder {
+    color: #BFC0C2;
+    padding-top: 3px;
+}
+
+.form-elements:focus {
+    outline: none;
+}
+
 .title-input {
-    align-items: center;
-    display: flex;
-    height: 30px;
-    justify-content: space-between;
-    width: 45%;
+
 }
 
 .body-input {
-    align-items: center;
-    display: flex;
-    height: 30px;
-    justify-content: space-between;
-    width: 45%;
+
 }
 
 .search-input {
-    height: 30px;
-    margin-top: 50px;
-    width: 45%;
+    margin: 50px 22.5% 0 22.5%;
 }
 
 .save-btn {
     background-color: #00a79d;
+    color: #FFFFFF; 
     border: none;
-    color: #fff;
-    font-size: 120%;
-    height: 30px;
-    width: 45.5%;
+    width: 55.7%;
 }
 
 .save-btn:hover {
@@ -66,52 +67,22 @@ body {
 }
 
 .save-btn:disabled {
-  background-color: #D3D3D3;  
-  pointer-events: none;
+    background-color: #D3D3D3;  
+    pointer-events: none;
 }
 
-input {
-    align-items: center;
-    display: flex;
-    /*font-family: 'Open Sans', sans-serif;*/
-    font-size: 100%;
-    justify-content: space-between;
-    margin: auto;
-}
-
-.form-elements {
-  color: #BFC0C2;
-  /*display: block;*/
-  /*font-size: 2em;*/
-  /*height: 2em;*/
-  /*margin: auto;*/
-  /*margin-bottom: 1.2em;*/
-  /*padding: .2em 0 .2em .4em;*/
-  width: 55%;
-}
-
-.form-elements::placeholder {
-  color: #BFC0C2;
-}
-
-.form-elements:focus {
-  outline: none;
+main {
+  margin: auto;
 }
 
 .populated-todo {
-    margin: auto;
     position: relative;
-    width: 45%;
+    width: 55%;
     border-bottom: .1em solid #D1D3D4;
     padding: 1em 0;
+    margin: 0 auto;
 }
 
-.card {
-    background-color: #ffffff;
-    height: auto;
-    margin: auto;
-    width: 45%;
-}
 
 .title-of-card {
     color: #6D6E71;
@@ -129,12 +100,10 @@ h2 {
 
 p {
     color: #939598;
-    /*font-family: 'Open Sans', sans-serif;*/
 }
 
 .body-of-card{
     color: #939598;
-    /*font-family: 'Open Sans', sans-serif;*/
     font-size: 100%;
 }
 
@@ -143,52 +112,49 @@ button {
     border: none;
 }
 
+.icon {
+    height: 30px;
+    width: 30px;
+}
+
+.icon:focus {
+    outline: none;
+}
+
 .up-vote--icon {
     background-image: url(./images/upvote.svg);
-    background-size: cover;
-    height: 20px;
+    /*background-size: cover;*/
     margin-right: 5px; 
-    width: 20px;
 }
 
 .up-vote--icon:hover {
-    background-color: transparent;
+    /*background-color: transparent;*/
     background-image: url(./images/upvote-hover.svg);
-    background-size: cover;
-    height: 20px;
-    width: 20px;
+    /*background-size: cover;*/
 }
 
 .down-vote--icon {
     background-image: url(./images/downvote.svg);
-    background-size: cover;
-    height: 20px;
+    /*background-size: cover;*/
     margin-right: 5px; 
-    width: 20px;
 }
 
 .down-vote--icon:hover {
     background-image: url(./images/downvote-hover.svg);
-    background-size: cover;
-    height: 20px;
-    width: 20px;
+    /*background-size: cover;*/
 }
 
-.delete-button {
+.delete-button--icon {
     background-image: url(./images/delete.svg);
-    background-size: cover;
-    height: 20px;
+    /*background-size: cover;*/
     position: absolute;
     right: 10px;
     top: 15px;
-    width: 20px;
 }
 
-.delete-button:hover {
+.delete-button--icon:hover {
     background-image: url(./images/delete-hover.svg);
-    background-size: cover;
-    height: 20px;
-    width: 20px;
+    /*background-size: cover;*/
 }
 
 @media(max-width: 640px){
