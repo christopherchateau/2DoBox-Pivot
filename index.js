@@ -4,10 +4,9 @@ $('.populated-todos--container').on('click', '.down-vote--icon', downVote);
 $('.populated-todos--container').on('click', '.delete-button--icon', deleteToDo);
 $('.populated-todos--container').on('keydown', '.todo-title', updateEditedTitle);
 $('.populated-todos--container').on('keydown', '.todo-body', updateEditedBody);
-// $('.populated-todos--container').bind('keypress', disableReturn);
 $('.title-input').on('keyup', toggleSaveButton);
 $('.body-input').on('keyup', toggleSaveButton);
-$('.save-btn').on('click', saveNewIdea)
+$('.save-btn').on('click', saveNewToDo)
 $('.search-input').on('keyup', search);
 
 function retrieveStoredToDos() {
@@ -25,7 +24,7 @@ function populateStoredToDos(toDoArr) {
   }
 }
 
-function saveNewIdea(e) {
+function saveNewToDo(e) {
     e.preventDefault();
     var toDo = toDoObject();
     wipeHTMLCards();
@@ -67,67 +66,8 @@ function createHTMLToDo(toDo) {
             </article>`
 }
 
-
-
-// $.each(localStorage, function(key) {
-//     var cardData = JSON.parse(this);
-    
-//     $('.bottom-box').prepend(createHTMLToDo(key, cardData.title, cardData.body, 'swill'));
-// });
-
-
-// $(".bottom-box").on('click', function(event) {
-//     var currentQuality = $($(event.target).siblings('p.quality').children()[0]).text().trim();
-//     var qualityVariable;
-
-//     if (event.target.className === "upvote" || event.target.className === "downvote"){
-
-//         if (event.target.className === "upvote" && currentQuality === "plausible"){
-//             qualityVariable = "genius";
-//             $($(event.target).siblings('p.quality').children()[0]).text(qualityVariable);
-               
-//         } else if (event.target.className === "upvote" && currentQuality === "swill") {
-//             qualityVariable = "plausible";
-//             $($(event.target).siblings('p.quality').children()[0]).text(qualityVariable);
-               
-//         } else if (event.target.className === "downvote" && currentQuality === "plausible") {
-//             qualityVariable = "swill"
-//             $($(event.target).siblings('p.quality').children()[0]).text(qualityVariable);
-
-//         } else if (event.target.className === "downvote" && currentQuality === "genius") {
-//             qualityVariable = "plausible"
-//             $($(event.target).siblings('p.quality').children()[0]).text(qualityVariable);
-
-//         } else if (event.target.className === "downvote" && currentQuality === "swill") {
-//             qualityVariable = "swill";
-        
-//         } else if (event.target.className === "upvote" && currentQuality === "genius") {
-//             qualityVariable = "genius";
-//         }
-
-//     var cardHTML = $(event.target).closest('.card-container');
-//     var cardHTMLId = cardHTML[0].id;
-//     var cardObjectInJSON = localStorage.getItem(cardHTMLId);
-//     var cardObjectInJS = JSON.parse(cardObjectInJSON);
-
-//     cardObjectInJS.quality = qualityVariable;
-
-//     var newCardJSON = JSON.stringify(cardObjectInJS);
-//     localStorage.setItem(cardHTMLId, newCardJSON);
-//     }
-   
-//     else if (event.target.className === "delete-button") {
-//         var cardHTML = $(event.target).closest('.card-container').remove();
-//         var cardHTMLId = cardHTML[0].id;
-//         localStorage.removeItem(cardHTMLId);
-//     }
-// });
-
-
-
 function upVote() {
   var clickedToDo = $(this).closest('.populated-todo');
-  console.log(clickedToDo)
   var parsedObj = getNParse(clickedToDo.attr('id'));
   qualityUpgrade(parsedObj);  
   stringNStore(parsedObj);
@@ -187,9 +127,9 @@ function getNParse(id) {
   return JSON.parse(localStorage.getItem(id));
 }
 
-function stringNStore(idea) {
-  var stringified = JSON.stringify(idea);
-  localStorage.setItem(idea.id, stringified);
+function stringNStore(toDo) {
+  var stringified = JSON.stringify(toDo);
+  localStorage.setItem(toDo.id, stringified);
 }
 
 function toggleSaveButton() {
@@ -226,9 +166,3 @@ function clearInputFields() {
 function wipeHTMLCards() {
   $('.populated-todos--container').html('');
 }
-
-// function disableReturn(e) {
-//    if (e.keyCode == 13) {
-//       return false;
-//    }
-// }
