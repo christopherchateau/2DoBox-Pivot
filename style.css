@@ -115,6 +115,7 @@ footer {
 button {
     background-color: transparent;
     border: none;
+    background-repeat: no-repeat;
 }
 
 .icon {
