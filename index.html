@@ -17,13 +17,13 @@
                     placeholder="Title"
                 >
                 <textarea
-                    class="body-input form-elements" 
-                    aria-label="Enter details about your to do" 
+                    class="task-input form-elements" 
+                    aria-label="Enter details about your task" 
                     type="text" 
-                    placeholder="Body"
+                    placeholder="Task"
                 ></textarea> 
                 <input 
-                    class="save-btn form-elements "
+                    class="save-btn form-elements btn"
                     aria-label="Save your to do"
                     type="submit"
                     value="save"
@@ -39,6 +39,52 @@
                 placeholder="Filter"
             >
             <article class="populated-todos--container"></article>
+            <section>
+                <input 
+                    class="none form-elements btn"
+                    aria-label="Filter for tasks with no importance"
+                    type="submit"
+                    value="none"
+                >
+                <input 
+                    class="low form-elements btn"
+                    aria-label="Filter for tasks with low importance"
+                    type="submit"
+                    value="low"
+                >
+                <input 
+                    class="normal form-elements btn"
+                    aria-label="Filter for tasks with normal importance"
+                    type="submit"
+                    value="normal"
+                >
+                <input 
+                    class="high form-elements btn"
+                    aria-label="Filter for tasks with high importance"
+                    type="submit"
+                    value="high"
+                >
+                <input 
+                    class="critical form-elements btn"
+                    aria-label="Filter for tasks with critical importance"
+                    type="submit"
+                    value="critical"
+                >
+                <input 
+                    class="show-all form-elements btn"
+                    aria-label="Show all your tasks"
+                    type="submit"
+                    value="show all"
+                >
+            </section>
+            <section>
+                <input 
+                    class="show-more-btn form-elements btn"
+                    aria-label="Show more of your tasks"
+                    type="submit"
+                    value="show more todo's..."
+                >
+            </section>
         </main>
         <script src="./jquery/jquery-3.2.1.js"></script>
         <script src="./index.js"></script>

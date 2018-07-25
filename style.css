@@ -38,25 +38,31 @@ body {
     padding-top: 3px;
 }
 
-.form-elements:focus {
+.form-elements:focus,
+.completed-task-btn:focus {
     outline: none;
 }
 
 .filter-input {
     margin-top: 50px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     display: flex;
 }
 
-.save-btn {
+.btn {
     background-color: #00a79d;
     color: #FFFFFF; 
     border: none;
     width: 55.7%;
     height: 3.3rem;
+    margin: 10px auto;
 }
 
-.save-btn:hover {
+.show-more-btn {
+    margin-bottom: 50px;
+}
+
+.btn:hover {
     background-color: #045e55;
 }
 
@@ -67,7 +73,7 @@ body {
 
 .populated-todos--container {
     padding-bottom: 50px;
-    width: 55%;
+    width: 56%;
     margin: auto;
 }
 
@@ -75,13 +81,12 @@ body {
     border-bottom: .1em solid #D1D3D4;
     padding: 1em 0;
     position: relative;
+    margin-top: 30px;
 }
 
-.title-of-card {
-    color: #6D6E71;
-    display: inline-block;
-    font-family: 'Roboto Slab', serif;
-    font-size: 140%;
+.todo-title,
+.todo-task {
+    padding-left: 4px;
 }
 
 h2 {
@@ -102,11 +107,6 @@ h3 {
 
 }
 
-.body-of-card{
-    color: #939598;
-    font-size: 100%;
-}
-
 footer {
     align-items: center;
     display: flex;
@@ -116,6 +116,10 @@ button {
     background-color: transparent;
     border: none;
     background-repeat: no-repeat;
+}
+
+section {
+    text-align: center;
 }
 
 .icon {
@@ -149,16 +153,27 @@ button {
     background-image: url(./images/delete.svg);
     border: none;
     position: absolute;
-    right: -7px;
-
+    right: 0px;
 }
 
 .delete-button--icon:hover {
     background-image: url(./images/delete-hover.svg);
 }
 
-.hidden {
-    display: none;
+.completed-task-btn {
+    background-color: #00a79d; 
+    color: white;
+    font-size: 1.3rem;
+    border-radius: 10px;
+    position: absolute;
+    right: 0px;
+    height: 40px;
+    width: 12rem;
+}
+
+.completed-task {
+    background: #E8E8E8;
+    text-decoration: line-through;
 }
 
 @media(max-width: 640px){
