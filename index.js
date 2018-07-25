@@ -2,8 +2,9 @@ $(document).ready(populateStoredToDos());
 $('.populated-todos--container').on('click', '.up-vote--icon', voteBtnClick);
 $('.populated-todos--container').on('click', '.down-vote--icon', voteBtnClick);
 $('.populated-todos--container').on('click', '.delete-button--icon', deleteToDo);
-$('.populated-todos--container').on('keydown', '.todo-title', updateEditedTitle);
-$('.populated-todos--container').on('keydown', '.todo-body', updateEditedBody);
+$('.populated-todos--container').on('keyup', '.todo-title', updateEditedTitle);
+$('.populated-todos--container').on('keyup', '.todo-body', updateEditedBody);
+$('.populated-todos--container').on('keydown', disableSoftReturn);
 $('.title-input').on('keyup', toggleSaveButton);
 $('.body-input').on('keyup', toggleSaveButton);
 $('.save-btn').on('click', saveNewToDo)
@@ -15,6 +16,7 @@ function populateStoredToDos() {
   storageArr.forEach(function(toDo) {
     prepareToDoCard(toDo);
   }); 
+  onlyDisplayTen();
 }
 
 function saveNewToDo(e) {
@@ -25,6 +27,7 @@ function saveNewToDo(e) {
     storageArr.push(toDo);
     stringNStore(storageArr);
     prepareToDoCard(toDo);
+    onlyDisplayTen();
 }
 
 function prepareToDoCard(toDo) {
@@ -80,26 +83,34 @@ function importanceChange(toDo, inc) {
   toDo.importance = importanceLevels[index];
 }
 
+function deleteToDo() {
+  var toDoId = $(this).closest('.populated-todo').attr('id');
+  var storageArr = getNParse();
+  var filteredStorageArr = storageArr.filter(function(toDo) {
+    return toDo.id != toDoId;
+  });
+  stringNStore(filteredStorageArr);
+  populateStoredToDos();
+}
+
 function updateEditedTitle(e) {
-  var editedTitle = $(this).closest('.todo-title').text();
-  var clickedId = $(this).closest('.populated-todo').attr('id');
-  var parsedObj = getNParse(clickedId);
-  if (e.keyCode == 13 && !e.shiftKey) {
-    $('.todo-title').blur();
-  }
-  parsedObj.title = editedTitle;
-  stringNStore(parsedObj);
+  var toDoId = $(this).closest('.populated-todo').attr('id');
+  var editedTitle = $(this).text();
+  var storageArr = getNParse();
+  storageArr.forEach(function(toDo) {
+    toDo.id == toDoId ? toDo.title = editedTitle : toDo.title;
+  });
+  stringNStore(storageArr);
 }
 
 function updateEditedBody(e) {
-  var editedBody = $(this).closest('.todo-body').text();
-  var clickedId = $(this).closest('.populated-todo').attr('id');
-  var parsedObj = getNParse(clickedId);
-  if (e.keyCode == 13 && !e.shiftKey) {
-    $('.todo-body').blur();
-  }
-  parsedObj.body = editedBody;
-  stringNStore(parsedObj);
+  var toDoId = $(this).closest('.populated-todo').attr('id');
+  var editedTitle = $(this).text();
+  var storageArr = getNParse();
+  storageArr.forEach(function(toDo) {
+    toDo.id == toDoId ? toDo.body = editedTitle : toDo.body;
+  });
+  stringNStore(storageArr);
 }
 
 function getNParse() {
@@ -130,14 +141,22 @@ function filterToDos() {
   });
 }
 
-function deleteToDo() {
-  var toDoId = $(this).closest('.populated-todo').attr('id');
-  var storageArr = getNParse();
-  var filteredStorageArr = storageArr.filter(function(toDo) {
-    return toDo.id != toDoId;
-  });
-  stringNStore(filteredStorageArr);
-  populateStoredToDos();
+// function toggleShowButton () {
+//   if ($('.bottom-box').children().length > 9) {
+//     $('.show-more-btn').show();
+//   } else {
+//     $('.show-more-btn').hide();
+//   }
+// }
+
+// function showMoreTasks() {
+//   $('.bottom-box').children().show();
+//   $('.show-more-btn').hide();
+// }
+
+function onlyDisplayTen() {
+  $('.populated-todos--container').children(":gt(9)").hide();
+  // toggleShowButton();
 }
 
 function clearInputFields() {
@@ -148,4 +167,11 @@ function clearInputFields() {
 
 function wipeHTMLCards() {
   $('.populated-todos--container').html('');
+}
+
+function disableSoftReturn(e) {
+  if (e.keyCode == 13 && !e.shiftKey) {
+    e.target.blur();
+    e.preventDefault();
+  }
 }

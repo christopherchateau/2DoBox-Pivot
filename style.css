@@ -16,7 +16,6 @@ body {
 .to-do--title{
     color: #6d6e71;
     font-size: 4rem;
-    margin-bottom: 30px;
 }
 
 .to-do--title-span {
@@ -28,7 +27,7 @@ body {
     font-size: 2em;
     height: 1.5em;
     margin: auto;
-    margin-bottom: 1.2em;
+    margin-bottom: 1em;
     padding: 2px 0 2px 8px;
     width: 55%;
     border: 2px solid #BFC0C2;
@@ -45,7 +44,7 @@ body {
 
 .filter-input {
     margin-top: 50px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     display: flex;
 }
 
@@ -54,6 +53,7 @@ body {
     color: #FFFFFF; 
     border: none;
     width: 55.7%;
+    height: 3.3rem;
 }
 
 .save-btn:hover {
