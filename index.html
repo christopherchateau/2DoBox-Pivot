@@ -8,35 +8,35 @@
     </head>
     <body>
         <header class="todo-box--container">
-                <form>
-                    <h1 class="to-do--title">2Do<span class="to-do--title-span">Box</span></h1>
-                    <input 
-                        class="title-input form-elements" 
-                        aria-label="Enter your to do item" 
-                        type="text" 
-                        placeholder="Title"
-                    >
-                    <textarea
-                        class="body-input form-elements" 
-                        aria-label="Enter details about your to do" 
-                        type="text" 
-                        placeholder="Body"
-                    ></textarea> 
-                    <input 
-                        class="save-btn form-elements "
-                        aria-label="Save your to do"
-                        type="submit"
-                        value="save"
-                        disabled="disabled" 
-                    >
-                </form>
+            <h1 class="to-do--title">2Do<span class="to-do--title-span">Box</span></h1>
+            <form>
+                <input 
+                    class="title-input form-elements" 
+                    aria-label="Enter your to do item" 
+                    type="text" 
+                    placeholder="Title"
+                >
+                <textarea
+                    class="body-input form-elements" 
+                    aria-label="Enter details about your to do" 
+                    type="text" 
+                    placeholder="Body"
+                ></textarea> 
+                <input 
+                    class="save-btn form-elements "
+                    aria-label="Save your to do"
+                    type="submit"
+                    value="save"
+                    disabled="disabled" 
+                >
+            </form>
         </header>
         <main>
             <input 
-                class="search-input form-elements" 
-                aria-label="Search your to do list" 
+                class="filter-input form-elements" 
+                aria-label="Filter your to do list" 
                 type="text"     
-                placeholder="Search"
+                placeholder="Filter"
             >
             <article class="populated-todos--container"></article>
         </main>
