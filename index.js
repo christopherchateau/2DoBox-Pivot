@@ -67,8 +67,8 @@ function createHTMLToDo(toDo) {
                   <button class="up-vote--icon icon"></button>
                   <button class="down-vote--icon icon"></button>
                   <h3>Importance: <span class="importance">${toDo.importance}</span></h3>
-                  <button class="completed-task-btn btn">Completed Task</button> 
                 </footer>
+                <button class="completed-task-btn btn">Completed Task</button> 
             </article>`
 }
 
@@ -182,6 +182,7 @@ function importanceFilter() {
       $(this).closest('.populated-todo').fadeOut();
     }
   });
+  clearInputFields();
 }
 
 function showAllToDos() {
