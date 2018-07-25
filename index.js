@@ -9,22 +9,6 @@ $('.body-input').on('keyup', toggleSaveButton);
 $('.save-btn').on('click', saveNewToDo)
 $('.filter-input').on('keyup', filterToDos);
 
-// function retrieveStoredToDos() {
-//   wipeHTMLCards();
-//   var toDoArr = [];
-//   var objKeys = Object.keys(localStorage);
-//   for (var i = 0; i < objKeys.length; i++) {
-//     toDoArr.push(getNParse(objKeys[i]));
-//   }
-//   return toDoArr;
-// }
-
-// function populateStoredToDos(toDoArr) {
-//   for (var i = 0; i < toDoArr.length; i++) {
-//     prepareToDoCard(toDoArr[i].id);
-//   }
-// }
-
 function populateStoredToDos() {
   var storageArr = getNParse();
   wipeHTMLCards();
@@ -33,39 +17,21 @@ function populateStoredToDos() {
   }); 
 }
 
-
 function saveNewToDo(e) {
     e.preventDefault();
     var toDo = toDoObject();
-    populateStoredToDos(retrieveStoredToDos());
-    stringNStore(toDo);
-    prepareToDoCard(toDo.id);
-    // cardCounter();
+    populateStoredToDos();
+    var storageArr = getNParse();
+    storageArr.push(toDo);
+    stringNStore(storageArr);
+    prepareToDoCard(toDo);
 }
 
 function prepareToDoCard(toDo) {
-    $('.populated-todos--container').prepend(createHTMLToDo(parsedObj)); 
+    $('.populated-todos--container').prepend(createHTMLToDo(toDo)); 
     clearInputFields();
     toggleSaveButton();
-    $('.title-input').focus();
 }
-
-// function cardCounter(toDoArr) {
-//   var visible = [], hidden = [];
-
-//   for (var i = 0; i < toDoArr.length; i++)
-
-//   hideCards(overTen);
-// }
-
-// function hideCards(overTen) {
-//   for (var i = 0; i < overTen.length; i++) {
-//     if (!$(`#${overTen[i]}`).hasClass('hidden')) {
-//       $(`#${overTen[i]}`).addClass('hidden');
-//     console.log(overTen)
-//     }
-//   }
-// }
 
 function toDoObject() {
     return {
@@ -93,20 +59,25 @@ function createHTMLToDo(toDo) {
 }
 
 function voteBtnClick() {
-  var clickedToDo = $(this).closest('.populated-todo');
-  var parsedObj = getNParse(clickedToDo.attr('id'));
-  $(this).hasClass('up-vote--icon') ? importanceChange(parsedObj, 1) : importanceChange(parsedObj, -1);  
-  stringNStore(parsedObj);
-  clickedToDo.find('.importance').text(parsedObj.importance);
+  var toDoId = $(this).closest('.populated-todo').attr('id');
+  var storageArr = getNParse(), inc;
+  $(this).hasClass('up-vote--icon') ? inc = 1 : inc = -1;
+  storageArr.forEach(function(toDo) {
+    if (toDo.id == toDoId) {
+      importanceChange(toDo, inc)
+    }
+  });
+  stringNStore(storageArr);
+  populateStoredToDos();
 }
 
-function importanceChange(obj, num) {
-  var impArr = ['None', 'Low', 'Normal', 'High', 'Critical']
-  var index = impArr.indexOf(obj.importance) + num;
+function importanceChange(toDo, inc) {
+  var importanceLevels = ['None', 'Low', 'Normal', 'High', 'Critical']
+  var index = importanceLevels.indexOf(toDo.importance) + inc;
   if (index > 4 || index < 0 ) {
     index = Math.abs(index) - 1;
   }
-  obj.importance = impArr[index];
+  toDo.importance = importanceLevels[index];
 }
 
 function updateEditedTitle(e) {
@@ -131,21 +102,12 @@ function updateEditedBody(e) {
   stringNStore(parsedObj);
 }
 
-// function getNParse(id) {
-//   return JSON.parse(localStorage.getItem(id));
-// }
-
-// function stringNStore(toDo) {
-//   var stringified = JSON.stringify(toDo);
-//   localStorage.setItem(toDo.id, stringified);
-// }
-
 function getNParse() {
   return JSON.parse(localStorage.getItem('toDoBox')) || [];
 }
 
-function stringNStore(toDo) {
-  var storageArr = JSON.stringify(toDo);
+function stringNStore(toDoArr) {
+  var stringifiedArr = JSON.stringify(toDoArr);
   localStorage.setItem('toDoBox', stringifiedArr);
 }
 
@@ -168,10 +130,14 @@ function filterToDos() {
   });
 }
 
-function deleteToDo(e) {
-  var clickedToDo = $(this).closest('.populated-todo');
-  clickedToDo.remove();
-  localStorage.removeItem(JSON.parse(clickedToDo.attr('id')));
+function deleteToDo() {
+  var toDoId = $(this).closest('.populated-todo').attr('id');
+  var storageArr = getNParse();
+  var filteredStorageArr = storageArr.filter(function(toDo) {
+    return toDo.id != toDoId;
+  });
+  stringNStore(filteredStorageArr);
+  populateStoredToDos();
 }
 
 function clearInputFields() {
