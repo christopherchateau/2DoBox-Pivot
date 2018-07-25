@@ -1,57 +1,80 @@
-$(document).ready(populateStoredToDos(retrieveStoredToDos()));
-$('.populated-todos--container').on('click', '.up-vote--icon', upVote);
-$('.populated-todos--container').on('click', '.down-vote--icon', downVote);
+$(document).ready(populateStoredToDos());
+$('.populated-todos--container').on('click', '.up-vote--icon', voteBtnClick);
+$('.populated-todos--container').on('click', '.down-vote--icon', voteBtnClick);
 $('.populated-todos--container').on('click', '.delete-button--icon', deleteToDo);
 $('.populated-todos--container').on('keydown', '.todo-title', updateEditedTitle);
 $('.populated-todos--container').on('keydown', '.todo-body', updateEditedBody);
-// $('.populated-todos--container').bind('keypress', disableReturn);
 $('.title-input').on('keyup', toggleSaveButton);
 $('.body-input').on('keyup', toggleSaveButton);
-$('.save-btn').on('click', saveNewIdea)
-$('.search-input').on('keyup', search);
+$('.save-btn').on('click', saveNewToDo)
+$('.filter-input').on('keyup', filterToDos);
 
-function retrieveStoredToDos() {
-  var toDoArr = [];
-  var objKeys = Object.keys(localStorage);
-  for (var i = 0; i < objKeys.length; i++) {
-    toDoArr.push(getNParse(objKeys[i]));
-  }
-  return toDoArr;
+// function retrieveStoredToDos() {
+//   wipeHTMLCards();
+//   var toDoArr = [];
+//   var objKeys = Object.keys(localStorage);
+//   for (var i = 0; i < objKeys.length; i++) {
+//     toDoArr.push(getNParse(objKeys[i]));
+//   }
+//   return toDoArr;
+// }
+
+// function populateStoredToDos(toDoArr) {
+//   for (var i = 0; i < toDoArr.length; i++) {
+//     prepareToDoCard(toDoArr[i].id);
+//   }
+// }
+
+function populateStoredToDos() {
+  var storageArr = getNParse();
+  wipeHTMLCards();
+  storageArr.forEach(function(toDo) {
+    prepareToDoCard(toDo);
+  }); 
 }
 
-function populateStoredToDos(toDoArr) {
-  for (var i = 0; i < toDoArr.length; i++) {
-    prepareToDoCard(toDoArr[i].id);
-  }
-}
 
-function saveNewIdea(e) {
+function saveNewToDo(e) {
     e.preventDefault();
     var toDo = toDoObject();
-    wipeHTMLCards();
     populateStoredToDos(retrieveStoredToDos());
     stringNStore(toDo);
     prepareToDoCard(toDo.id);
+    // cardCounter();
 }
 
-function prepareToDoCard(id) {
-    var parsedObj = getNParse(id);
+function prepareToDoCard(toDo) {
     $('.populated-todos--container').prepend(createHTMLToDo(parsedObj)); 
     clearInputFields();
     toggleSaveButton();
     $('.title-input').focus();
 }
 
+// function cardCounter(toDoArr) {
+//   var visible = [], hidden = [];
+
+//   for (var i = 0; i < toDoArr.length; i++)
+
+//   hideCards(overTen);
+// }
+
+// function hideCards(overTen) {
+//   for (var i = 0; i < overTen.length; i++) {
+//     if (!$(`#${overTen[i]}`).hasClass('hidden')) {
+//       $(`#${overTen[i]}`).addClass('hidden');
+//     console.log(overTen)
+//     }
+//   }
+// }
+
 function toDoObject() {
     return {
         id: Date.now(),
         title: $('.title-input').val(),
         body: $('.body-input').val(),
-        quality: 'swill',
+        importance: 'Normal',
     };
 }
-
-var qualityVariable = "swill";
 
 function createHTMLToDo(toDo) {
     
@@ -61,104 +84,29 @@ function createHTMLToDo(toDo) {
                     <button class="delete-button--icon icon"></button>
                     <p contenteditable spellcheck="false" class="todo-body">${toDo.body}</p>
                 </div>
-                <button class="up-vote--icon icon"></button>
-                <button class="down-vote--icon icon"></button> 
-                <h3>Quality: <span class="quality">${toDo.quality}</span></p>
+                <footer>
+                  <button class="up-vote--icon icon"></button>
+                  <button class="down-vote--icon icon"></button> 
+                  <h3>Importance: <span class="importance">${toDo.importance}</span></h3>
+                </footer>
             </article>`
 }
 
-
-
-// $.each(localStorage, function(key) {
-//     var cardData = JSON.parse(this);
-    
-//     $('.bottom-box').prepend(createHTMLToDo(key, cardData.title, cardData.body, 'swill'));
-// });
-
-
-// $(".bottom-box").on('click', function(event) {
-//     var currentQuality = $($(event.target).siblings('p.quality').children()[0]).text().trim();
-//     var qualityVariable;
-
-//     if (event.target.className === "upvote" || event.target.className === "downvote"){
-
-//         if (event.target.className === "upvote" && currentQuality === "plausible"){
-//             qualityVariable = "genius";
-//             $($(event.target).siblings('p.quality').children()[0]).text(qualityVariable);
-               
-//         } else if (event.target.className === "upvote" && currentQuality === "swill") {
-//             qualityVariable = "plausible";
-//             $($(event.target).siblings('p.quality').children()[0]).text(qualityVariable);
-               
-//         } else if (event.target.className === "downvote" && currentQuality === "plausible") {
-//             qualityVariable = "swill"
-//             $($(event.target).siblings('p.quality').children()[0]).text(qualityVariable);
-
-//         } else if (event.target.className === "downvote" && currentQuality === "genius") {
-//             qualityVariable = "plausible"
-//             $($(event.target).siblings('p.quality').children()[0]).text(qualityVariable);
-
-//         } else if (event.target.className === "downvote" && currentQuality === "swill") {
-//             qualityVariable = "swill";
-        
-//         } else if (event.target.className === "upvote" && currentQuality === "genius") {
-//             qualityVariable = "genius";
-//         }
-
-//     var cardHTML = $(event.target).closest('.card-container');
-//     var cardHTMLId = cardHTML[0].id;
-//     var cardObjectInJSON = localStorage.getItem(cardHTMLId);
-//     var cardObjectInJS = JSON.parse(cardObjectInJSON);
-
-//     cardObjectInJS.quality = qualityVariable;
-
-//     var newCardJSON = JSON.stringify(cardObjectInJS);
-//     localStorage.setItem(cardHTMLId, newCardJSON);
-//     }
-   
-//     else if (event.target.className === "delete-button") {
-//         var cardHTML = $(event.target).closest('.card-container').remove();
-//         var cardHTMLId = cardHTML[0].id;
-//         localStorage.removeItem(cardHTMLId);
-//     }
-// });
-
-
-
-function upVote() {
-  var clickedToDo = $(this).closest('.populated-todo');
-  console.log(clickedToDo)
-  var parsedObj = getNParse(clickedToDo.attr('id'));
-  qualityUpgrade(parsedObj);  
-  stringNStore(parsedObj);
-  clickedToDo.find('.quality').text(parsedObj.quality);
-}
-
-function downVote() {
+function voteBtnClick() {
   var clickedToDo = $(this).closest('.populated-todo');
   var parsedObj = getNParse(clickedToDo.attr('id'));
-  qualityDowngrade(parsedObj);
+  $(this).hasClass('up-vote--icon') ? importanceChange(parsedObj, 1) : importanceChange(parsedObj, -1);  
   stringNStore(parsedObj);
-  clickedToDo.find('.quality').text(parsedObj.quality);
+  clickedToDo.find('.importance').text(parsedObj.importance);
 }
 
-
-function qualityUpgrade(obj) {
-  if (obj.quality === 'swill') {
-    obj.quality = 'plausible';
-  }    
-  else if (obj.quality === 'plausible') {
-    obj.quality = 'genius';
+function importanceChange(obj, num) {
+  var impArr = ['None', 'Low', 'Normal', 'High', 'Critical']
+  var index = impArr.indexOf(obj.importance) + num;
+  if (index > 4 || index < 0 ) {
+    index = Math.abs(index) - 1;
   }
-}
-
-function qualityDowngrade(obj) {
-  if (obj.quality === 'genius') {
-    obj.quality = 'plausible';
-  }    
-  else if (obj.quality === 'plausible') {
-    obj.quality = 'swill';
-  }
+  obj.importance = impArr[index];
 }
 
 function updateEditedTitle(e) {
@@ -183,13 +131,22 @@ function updateEditedBody(e) {
   stringNStore(parsedObj);
 }
 
-function getNParse(id) {
-  return JSON.parse(localStorage.getItem(id));
+// function getNParse(id) {
+//   return JSON.parse(localStorage.getItem(id));
+// }
+
+// function stringNStore(toDo) {
+//   var stringified = JSON.stringify(toDo);
+//   localStorage.setItem(toDo.id, stringified);
+// }
+
+function getNParse() {
+  return JSON.parse(localStorage.getItem('toDoBox')) || [];
 }
 
-function stringNStore(idea) {
-  var stringified = JSON.stringify(idea);
-  localStorage.setItem(idea.id, stringified);
+function stringNStore(toDo) {
+  var storageArr = JSON.stringify(toDo);
+  localStorage.setItem('toDoBox', stringifiedArr);
 }
 
 function toggleSaveButton() {
@@ -200,8 +157,8 @@ function toggleSaveButton() {
   }
 }
 
-function search() {
-  var lowerCaseInput =  $('.search-input').val().toLowerCase();
+function filterToDos() {
+  var lowerCaseInput =  $('.filter-input').val().toLowerCase();
   $('.searchable').each(function() {
     if($(this).text().toLowerCase().indexOf(lowerCaseInput) !== -1) {
       $(this).parent().fadeIn();
@@ -220,15 +177,9 @@ function deleteToDo(e) {
 function clearInputFields() {
   $('.title-input').val('');
   $('.body-input').val('');
-  $('.search-input').val('');
+  $('.filter-input').val('');
 }
 
 function wipeHTMLCards() {
   $('.populated-todos--container').html('');
 }
-
-// function disableReturn(e) {
-//    if (e.keyCode == 13) {
-//       return false;
-//    }
-// }

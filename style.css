@@ -43,16 +43,10 @@ body {
     outline: none;
 }
 
-.title-input {
-
-}
-
-.body-input {
-
-}
-
-.search-input {
-    margin: 50px 22.5% 0 22.5%;
+.filter-input {
+    margin-top: 50px;
+    margin-bottom: 20px;
+    display: flex;
 }
 
 .save-btn {
@@ -71,18 +65,17 @@ body {
     pointer-events: none;
 }
 
-main {
-  margin: auto;
+.populated-todos--container {
+    padding-bottom: 50px;
+    width: 55%;
+    margin: auto;
 }
 
 .populated-todo {
-    position: relative;
-    width: 55%;
     border-bottom: .1em solid #D1D3D4;
     padding: 1em 0;
-    margin: 0 auto;
+    position: relative;
 }
-
 
 .title-of-card {
     color: #6D6E71;
@@ -102,9 +95,21 @@ p {
     color: #939598;
 }
 
+h3 {
+    margin-left: 10px;
+    color: #6d6e71;
+    position: relative;
+
+}
+
 .body-of-card{
     color: #939598;
     font-size: 100%;
+}
+
+footer {
+    align-items: center;
+    display: flex;
 }
 
 button {
@@ -113,8 +118,8 @@ button {
 }
 
 .icon {
-    height: 30px;
-    width: 30px;
+    height: 35px;
+    width: 35px;
 }
 
 .icon:focus {
@@ -123,38 +128,36 @@ button {
 
 .up-vote--icon {
     background-image: url(./images/upvote.svg);
-    /*background-size: cover;*/
     margin-right: 5px; 
 }
 
 .up-vote--icon:hover {
-    /*background-color: transparent;*/
     background-image: url(./images/upvote-hover.svg);
-    /*background-size: cover;*/
 }
 
 .down-vote--icon {
     background-image: url(./images/downvote.svg);
-    /*background-size: cover;*/
     margin-right: 5px; 
 }
 
 .down-vote--icon:hover {
     background-image: url(./images/downvote-hover.svg);
-    /*background-size: cover;*/
 }
 
 .delete-button--icon {
     background-image: url(./images/delete.svg);
-    /*background-size: cover;*/
+    border: none;
     position: absolute;
-    right: 10px;
-    top: 15px;
+    right: -7px;
+
 }
 
 .delete-button--icon:hover {
     background-image: url(./images/delete-hover.svg);
-    /*background-size: cover;*/
+}
+
+.hidden {
+    display: none;
 }
 
 @media(max-width: 640px){
@@ -163,7 +166,7 @@ button {
         width: 85%;
     }
 
-    .search-input {
+    .filter-input {
         border: solid #999 1px;
     }
 }
