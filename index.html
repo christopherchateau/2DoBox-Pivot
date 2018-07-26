@@ -1,5 +1,5 @@
 <!doctype html>
-<html> 
+<html lang="eng"> 
     <head>
         <title>2DoBox</title>
         <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:700|Open+Sans" rel="stylesheet">
@@ -8,7 +8,7 @@
     </head>
     <body>
         <header class="todo-box--container">
-            <h1 class="to-do--title">2Do<span class="to-do--title-span">Box</span></h1>
+            <h1 class="to-do--main-title">2Do<span class="to-do--title-span">Box</span></h1>
             <form>
                 <input 
                     class="title-input form-elements" 
@@ -40,38 +40,39 @@
             >
             <article class="populated-todos--container"></article>
             <section>
+                <h1 class="filter-tasks--title">filter<span class="filter-tasks--title-span">Tasks</span></h1>
                 <input 
-                    class="none form-elements btn"
+                    class="none form-elements btn rounded-btn"
                     aria-label="Filter for tasks with no importance"
                     type="submit"
                     value="none"
                 >
                 <input 
-                    class="low form-elements btn"
+                    class="low form-elements btn rounded-btn"
                     aria-label="Filter for tasks with low importance"
                     type="submit"
                     value="low"
                 >
                 <input 
-                    class="normal form-elements btn"
+                    class="normal form-elements btn rounded-btn"
                     aria-label="Filter for tasks with normal importance"
                     type="submit"
                     value="normal"
                 >
                 <input 
-                    class="high form-elements btn"
+                    class="high form-elements btn rounded-btn"
                     aria-label="Filter for tasks with high importance"
                     type="submit"
                     value="high"
                 >
                 <input 
-                    class="critical form-elements btn"
+                    class="critical form-elements btn rounded-btn"
                     aria-label="Filter for tasks with critical importance"
                     type="submit"
                     value="critical"
                 >
                 <input 
-                    class="show-all form-elements btn"
+                    class="show-all form-elements btn rounded-btn"
                     aria-label="Show all your tasks"
                     type="submit"
                     value="show all"
@@ -79,7 +80,7 @@
             </section>
             <section>
                 <input 
-                    class="show-more-btn form-elements btn"
+                    class="show-more-btn form-elements btn rounded-btn"
                     aria-label="Show more of your tasks"
                     type="submit"
                     value="show more todo's..."
