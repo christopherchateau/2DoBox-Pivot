@@ -4,16 +4,48 @@ body {
     margin: 0;
 }
 
+h2 {
+   color: #6d6e71; 
+   display: inline-block;
+   font-family: 'Roboto Slab', serif;
+   font-size: 150%;
+}
+
+h3 {
+    color: #6d6e71;
+    margin-left: 10px;
+    position: relative;
+}
+
+p {
+    color: #939598;
+}
+
+button {
+    background-color: transparent;
+    border: none;
+    background-repeat: no-repeat;
+}
+
+section {
+    text-align: center;
+}
+
+footer {
+    align-items: center;
+    display: flex;
+}
+
 .todo-box--container {
+    background-color: #e5f3f2;
     display: flex;
     flex-direction: column;
     font-family: 'Roboto Slab', serif;
-    background-color: #e5f3f2;
     height: 30%;
     text-align: center;
 }
 
-.to-do--title{
+.to-do--main-title {
     color: #6d6e71;
     font-size: 4rem;
 }
@@ -23,6 +55,7 @@ body {
 }
 
 .form-elements {
+    border: 2px solid #BFC0C2;
     color: #939598;
     font-size: 2em;
     height: 1.5em;
@@ -30,7 +63,6 @@ body {
     margin-bottom: 1em;
     padding: 2px 0 2px 8px;
     width: 55%;
-    border: 2px solid #BFC0C2;
 }
 
 .form-elements::placeholder {
@@ -44,30 +76,27 @@ body {
 }
 
 .filter-input {
-    margin-top: 50px;
     margin-bottom: 20px;
+    margin-top: 35px;
     display: flex;
 }
 
 .btn {
     background-color: #00a79d;
-    color: #FFFFFF; 
     border: none;
-    width: 55.7%;
+    color: #FFFFFF; 
     height: 3.3rem;
     margin: 10px auto;
-}
-
-.show-more-btn {
-    margin-bottom: 50px;
+    width: 55.7%;
 }
 
 .btn:hover {
     background-color: #045e55;
 }
+
 .save-btn {
     margin-top: 0;
-    margin-bottom: 20px;
+    margin-bottom: 35px;
 }
 
 .save-btn:disabled {
@@ -76,55 +105,23 @@ body {
 }
 
 .populated-todos--container {
+    margin: auto;
     padding-bottom: 50px;
     width: 56%;
-    margin: auto;
 }
 
 .populated-todo {
     border-bottom: .1em solid #D1D3D4;
+    margin-top: 30px;
     padding: 1em 0;
     position: relative;
-    margin-top: 30px;
 }
 
-.todo-title,
-.todo-task {
+.todo-task,
+.todo-title {
     padding-left: 4px;
 }
 
-h2 {
-   color: #6d6e71; 
-   display: inline-block;
-   font-family: 'Roboto Slab', serif;
-   font-size: 150%;
-}
-
-p {
-    color: #939598;
-}
-
-h3 {
-    margin-left: 10px;
-    color: #6d6e71;
-    position: relative;
-
-}
-
-footer {
-    align-items: center;
-    display: flex;
-}
-
-button {
-    background-color: transparent;
-    border: none;
-    background-repeat: no-repeat;
-}
-
-section {
-    text-align: center;
-}
 
 .icon {
     height: 35px;
@@ -166,12 +163,12 @@ section {
 
 .completed-task-btn {
     background-color: #00a79d; 
+    border-radius: 30px;
     color: white;
     font-size: 1.3rem;
-    border-radius: 10px;
     height: 40px;
-    width: 11rem;
     margin-top: 10px;
+    width: 11rem;
 }
 
 .completed-task {
@@ -179,7 +176,56 @@ section {
     text-decoration: line-through;
 }
 
-@media(max-width: 785px){
+.rounded-btn {
+    font-size: 1.4rem;
+    height: 2rem;
+    border-radius: 40px;
+    width: 35%;
+    margin: 10px;
+}
+
+.show-more-btn {
+    margin-bottom: 50px;
+}
+
+.filter-tasks--title {
+    color: #6d6e71;
+    font-size: 3.2rem;
+}
+
+.filter-tasks--title-span {
+    color: #00a79d;
+}
+
+@media(max-width: 785px) {
+
+    .to-do--title {
+        font-size: 2rem;
+    }
+
+    .filter-tasks--title {
+        font-size: 2.5rem;
+    }
+
+    .populated-todos--container {
+        width: 80%;
+    }
+
+    .form-elements {
+        width: 80%;
+    }
+
+    .btn {
+        width: 82%;
+    }
+
+    .populated-todo {
+        padding: .5rem;
+    }
+
+    .populated-todos--container {
+        padding-bottom: 20px
+    }
 
     .card-container {
         width: 85%;
@@ -187,10 +233,22 @@ section {
 
     .filter-input {
         border: solid #999 1px;
+        margin-top: 30px;
+    }
+
+    .rounded-btn {
+        font-size: 1.1rem;
+        width: 50%;
+    }
+
+    .todo-task,
+    .todo-title {
+        padding-left: 2px;
     }
 
     .completed-task-btn {
-        display: flex;
+        font-size: 1.1rem;
+        height: 30px;
+        width: 10rem;
     }
-
 }

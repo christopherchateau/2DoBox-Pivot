@@ -16,8 +16,7 @@ $('.low').on('click', importanceFilter);
 $('.normal').on('click', importanceFilter);
 $('.high').on('click', importanceFilter);
 $('.critical').on('click', importanceFilter);
-$('.show-all').on('click', showAllToDos);
-
+$('.show-all').on('click', populateStoredToDos);
 
 function populateStoredToDos() {
   var storageArr = getNParse();
@@ -68,32 +67,21 @@ function createHTMLToDo(toDo) {
                   <button class="down-vote--icon icon"></button>
                   <h3>Importance: <span class="importance">${toDo.importance}</span></h3>
                 </footer>
-                <button class="completed-task-btn btn">Completed Task</button> 
+                <button class="completed-task-btn btn">completed task</button> 
             </article>`
 }
 
 function voteBtnClick() {
   var toDoId = $(this).closest('.populated-todo').attr('id');
-  var storageArr = getNParse(), inc;
+  var inc;
   $(this).hasClass('up-vote--icon') ? inc = 1 : inc = -1;
-  storageArr.find(function(toDo) {
-    if (toDo.id == toDoId) {
-      importanceChange(toDo, inc);
-    }
-  });
-  stringNStore(storageArr);
+  findVoterId(getNParse(), toDoId, inc);
   populateStoredToDos();
 }
 
 function completedTask() {
-  var toDoId = $(this).closest('.populated-todo').attr('id');
-  var storageArr = getNParse();
-  storageArr.find(function(toDo) {
-    if (toDo.id == toDoId) {
-      completedTaskChecker(toDo, toDoId);
-    }
-  });
-  stringNStore(storageArr);
+  var toDoId = getId($(this));
+  findCompletedTaskId(getNParse(), toDoId);
 }
 
 function completedTaskChecker(toDo, toDoId) {
@@ -106,6 +94,24 @@ function completedTaskChecker(toDo, toDoId) {
   }
 }
 
+function findVoterId(storage, id, inc){
+  storage.find(function(toDo) {
+    if (toDo.id == id) {
+      importanceChange(toDo, inc);
+    }
+  });
+  stringNStore(storage);
+}
+
+function findCompletedTaskId(storage, id) {
+  storage.find(function(toDo) {
+    if (toDo.id == id) {
+      completedTaskChecker(toDo, id);
+    }
+  });
+  stringNStore(storage);
+}
+
 function importanceChange(toDo, inc) {
   var importanceLevels = ['None', 'Low', 'Normal', 'High', 'Critical']
   var index = importanceLevels.indexOf(toDo.importance) + inc;
@@ -116,7 +122,7 @@ function importanceChange(toDo, inc) {
 }
 
 function deleteToDo() {
-  var toDoId = $(this).closest('.populated-todo').attr('id');
+  var toDoId = getId($(this));
   var storageArr = getNParse();
   var filteredStorageArr = storageArr.filter(function(toDo) {
     return toDo.id != toDoId;
@@ -126,7 +132,7 @@ function deleteToDo() {
 }
 
 function updateEditedTitle() {
-  var toDoId = $(this).closest('.populated-todo').attr('id');
+  var toDoId = getId($(this));
   var editedTitle = $(this).text();
   var storageArr = getNParse();
   storageArr.find(function(toDo) {
@@ -136,11 +142,11 @@ function updateEditedTitle() {
 }
 
 function updateEditedTask() {
-  var toDoId = $(this).closest('.populated-todo').attr('id');
-  var editedTitle = $(this).text();
+  var toDoId = getId($(this));
+  var editedTask = $(this).text();
   var storageArr = getNParse();
   storageArr.forEach(function(toDo) {
-    toDo.id == toDoId ? toDo.task = editedTitle : toDo.task;
+    toDo.id == toDoId ? toDo.task = editedTask : toDo.task;
   });
   stringNStore(storageArr);
 }
@@ -185,10 +191,6 @@ function importanceFilter() {
   clearInputFields();
 }
 
-function showAllToDos() {
-  populateStoredToDos();
-}
-
 function toggleShowButton() {
   if ($('.populated-todos--container').children().length >= 10) {
     $('.show-more-btn').show();
@@ -211,6 +213,10 @@ function clearInputFields() {
   $('.title-input').val('');
   $('.task-input').val('');
   $('.filter-input').val('');
+}
+
+function getId(clickedToDo) {
+  return clickedToDo.closest('.populated-todo').attr('id')
 }
 
 function wipeHTMLCards() {
